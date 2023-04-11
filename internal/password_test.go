@@ -8,28 +8,28 @@ import (
 func TestPassword(t *testing.T) {
 	// Same character type
 	t.Run("generate an 8-long password with lowercases only", func(t *testing.T) {
-		options := Options{length: 8, hasLowercase: true}
+		options := Option{Length: 8, HasLowercase: true}
 		got := Generate(options)
 
 		assertCorrectPassword(t, got, `^[a-z]{8}$`, "lowercase only")
 	})
 
 	t.Run("generate an 9-long password with uppercases only", func(t *testing.T) {
-		options := Options{length: 9, hasUppercase: true}
+		options := Option{Length: 9, HasUppercase: true}
 		got := Generate(options)
 
 		assertCorrectPassword(t, got, `^[A-Z]{9}$`, "uppercase only")
 	})
 
 	t.Run("generate an 10-long password with numbers only", func(t *testing.T) {
-		options := Options{length: 10, hasNumber: true}
+		options := Option{Length: 10, HasNumber: true}
 		got := Generate(options)
 
 		assertCorrectPassword(t, got, `^[0-9]{10}$`, "number only")
 	})
 
 	t.Run("generate an 11-long password with symbols only", func(t *testing.T) {
-		options := Options{length: 11, hasSymbol: true}
+		options := Option{Length: 11, HasSymbol: true}
 		got := Generate(options)
 
 		assertCorrectPassword(t, got, `^[_\W]{11}$`, "symbol only")
@@ -37,7 +37,7 @@ func TestPassword(t *testing.T) {
 
 	// Mixed characters
 	t.Run("generate an 8-long password with uppercases and lowercase", func(t *testing.T) {
-		options := Options{length: 8, hasLowercase: true, hasUppercase: true}
+		options := Option{Length: 8, HasLowercase: true, HasUppercase: true}
 		got := Generate(options)
 
 		// TODO: need to fix this regex
@@ -45,7 +45,7 @@ func TestPassword(t *testing.T) {
 	})
 
 	t.Run("generate an 16-long password with uppercases and numbers", func(t *testing.T) {
-		options := Options{length: 16, hasNumber: true, hasUppercase: true}
+		options := Option{Length: 16, HasNumber: true, HasUppercase: true}
 		got := Generate(options)
 
 		// TODO: need to fix this regex

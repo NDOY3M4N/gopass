@@ -1,30 +1,34 @@
 package internal
 
-type Options struct {
-	length       int
-	hasUppercase bool
-	hasLowercase bool
-	hasNumber    bool
-	hasSymbol    bool
+type Option struct {
+	Length       int
+	HasUppercase bool
+	HasLowercase bool
+	HasNumber    bool
+	HasSymbol    bool
 }
 
-func Generate(o Options) string {
+func NewOption() Option {
+	return Option{Length: 8, HasLowercase: true}
+}
+
+func Generate(o Option) string {
 	var result string
 
-	for i := 0; i < o.length; i++ {
+	for i := 0; i < o.Length; i++ {
 		// rand.Seed(time.Now().UnixNano())
 
-		if len(result) < o.length {
-			if o.hasLowercase {
+		if len(result) < o.Length {
+			if o.HasLowercase {
 				result += RandomLowercase()
 			}
-			if o.hasUppercase {
+			if o.HasUppercase {
 				result += RandomUppercase()
 			}
-			if o.hasNumber {
+			if o.HasNumber {
 				result += RandomNumber()
 			}
-			if o.hasSymbol {
+			if o.HasSymbol {
 				result += RandomSymbol()
 			}
 		}

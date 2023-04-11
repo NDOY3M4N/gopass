@@ -2,22 +2,20 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
-	"time"
-
 	"github.com/NDOY3M4N/gopass/internal"
 )
 
 func main() {
-	rand.Seed(time.Now().UnixNano())
+	option := internal.Option{
+		Length:       16,
+		HasUppercase: true,
+		HasLowercase: true,
+		HasNumber:    true,
+		HasSymbol:    true,
+	}
 
-	randLower := internal.RandomLowercase()
-	randUpper := internal.RandomUppercase()
-	randNumber := internal.RandomNumber()
-	randSymbol := internal.RandomSymbol()
+	pwd := internal.Generate(option)
 
-	fmt.Println("Random lowercase", randLower)
-	fmt.Println("Random uppercase", randUpper)
-	fmt.Println("Random number", randNumber)
-	fmt.Println("Random symbol", randSymbol)
+	fmt.Println("Welcome to my humble cli app")
+	fmt.Println("The generated password is", pwd)
 }
