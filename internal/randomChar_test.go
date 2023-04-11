@@ -2,7 +2,6 @@ package internal
 
 import (
 	"regexp"
-	"strings"
 	"testing"
 )
 
@@ -24,10 +23,7 @@ func TestRandomCharacter(t *testing.T) {
 
 	t.Run("get a random symbol", func(t *testing.T) {
 		s := RandomSymbol()
-
-		if !strings.Contains(symbols, s) {
-			t.Error("the random character is not a symbol")
-		}
+		assertCorrectRegex(t, s, "[_\\W]", "symbol only password")
 	})
 }
 
