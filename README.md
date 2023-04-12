@@ -6,7 +6,9 @@ GoPass is a super simple CLI program for generating "random" passwords.
 
 ## Usage
 
-After you've cloned the repo, you need to first define the options in the `main.go` file
+> **Note** This project is just **me** learning Golang, the code is not perfect 😅.
+
+After you've cloned the repo, you first need to define the options in the `main.go` file
 
 ```go
 option := internal.Option{
