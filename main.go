@@ -9,9 +9,9 @@ func main() {
 	option := internal.Option{
 		Length:       8,
 		HasUppercase: true,
-		// HasLowercase: true,
-		// HasNumber: true,
-		// HasSymbol: true,
+		HasLowercase: true,
+		HasNumber:    true,
+		HasSymbol:    true,
 	}
 
 	pwd, score := internal.Generate(option)

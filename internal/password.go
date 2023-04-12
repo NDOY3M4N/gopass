@@ -1,6 +1,9 @@
 package internal
 
-import "math"
+import (
+	"math"
+	"math/rand"
+)
 
 type Option struct {
 	Length       int
@@ -10,6 +13,7 @@ type Option struct {
 	HasSymbol    bool
 }
 
+// NOTE: Do I need this bad boi?
 func NewOption() Option {
 	return Option{Length: 8, HasLowercase: true}
 }
@@ -17,41 +21,29 @@ func NewOption() Option {
 func Generate(o Option) (pwd, entropy string) {
 	var result string
 	var possibleChars int
+	var fns []func() string
 
 	if o.HasLowercase {
 		possibleChars += 26
+		fns = append(fns, RandomLowercase)
 	}
 	if o.HasUppercase {
 		possibleChars += 26
+		fns = append(fns, RandomUppercase)
 	}
 	if o.HasNumber {
 		possibleChars += 10
+		fns = append(fns, RandomNumber)
 	}
 	if o.HasSymbol {
 		possibleChars += len(symbols)
+		fns = append(fns, RandomSymbol)
 	}
 
 	for i := 0; i < o.Length; i++ {
-		// rand.Seed(time.Now().UnixNano())
-
-		if len(result) < o.Length {
-			if o.HasLowercase {
-				result += RandomLowercase()
-				continue
-			}
-			if o.HasUppercase {
-				result += RandomUppercase()
-				continue
-			}
-			if o.HasNumber {
-				result += RandomNumber()
-				continue
-			}
-			if o.HasSymbol {
-				result += RandomSymbol()
-				continue
-			}
-		}
+		// TODO: this isn't what I want.
+		randomIndex := rand.Intn(len(fns))
+		result += fns[randomIndex]()
 	}
 
 	score := calculateScore(o.Length, possibleChars)
