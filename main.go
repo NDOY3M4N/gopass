@@ -7,15 +7,15 @@ import (
 
 func main() {
 	option := internal.Option{
-		Length:       16,
+		Length:       8,
 		HasUppercase: true,
-		HasLowercase: true,
-		HasNumber:    true,
-		HasSymbol:    true,
+		// HasLowercase: true,
+		// HasNumber: true,
+		// HasSymbol: true,
 	}
 
-	pwd := internal.Generate(option)
+	pwd, score := internal.Generate(option)
 
 	fmt.Println("Welcome to my humble cli app")
-	fmt.Println("The generated password is", pwd)
+	fmt.Printf("The generated password is %q and the score is %v", pwd, score)
 }
