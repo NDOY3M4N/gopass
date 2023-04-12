@@ -1,7 +1,23 @@
-# GoPass
+# 🔒 GoPass
 
-GoPass is a CLI app for generating random passwords.
+![made-in-galsen](https://raw.githubusercontent.com/GalsenDev221/made.in.senegal/master/assets/badge.svg)
 
-## TODO
+GoPass is a super simple CLI program for generating "random" passwords.
 
-- [ ] create a function for generating a random string, number & symbol
+## Usage
+
+After you've cloned the repo, you need to first define the options in the `main.go` file
+
+```go
+option := internal.Option{
+  Length: 16,
+  HasUppercase: true,
+  HasLowercase: true,
+  HasNumber: true,
+  HasSymbol: true
+}
+
+pwd, score := internal.Generate(option)
+```
+
+And now, you can run the program with `go run .` or build it `go build` to generate passwords.
