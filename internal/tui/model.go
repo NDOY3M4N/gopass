@@ -147,12 +147,15 @@ func (m model) View() string {
 		s += charsView(m)
 	}
 
-	// TODO: render help text
+	// NOTE: help text here
+	s += "down/j: up - down/j: down - space: select item - enter: confirm selection"
+
 	return s
 }
 
 func lengthView(m model) string {
-	var s string
+	s := "Choose the character length\n\n"
+
 	for index, i := range m.listLength {
 		var cursor string
 		if index == m.cursorListLength {
@@ -175,7 +178,7 @@ func lengthView(m model) string {
 }
 
 func charsView(m model) string {
-	var s string
+	s := "Choose the characters to include\n\n"
 	for index, i := range m.listChars {
 		var cursor string
 		if index == m.cursorListChars {
