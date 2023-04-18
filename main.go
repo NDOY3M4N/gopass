@@ -2,20 +2,15 @@ package main
 
 import (
 	"fmt"
-	"github.com/NDOY3M4N/gopass/internal"
+	"os"
+
+	"github.com/NDOY3M4N/gopass/internal/tui"
+	tea "github.com/charmbracelet/bubbletea"
 )
 
 func main() {
-	option := internal.Option{
-		Length:       8,
-		HasUppercase: true,
-		HasLowercase: true,
-		HasNumber:    true,
-		HasSymbol:    true,
+	if _, err := tea.NewProgram(tui.NewModel()).Run(); err != nil {
+		fmt.Println("Error running program:", err)
+		os.Exit(1)
 	}
-
-	pwd, score := internal.Generate(option)
-
-	fmt.Println("Welcome to my humble cli app")
-	fmt.Printf("The generated password is %q and the score is %v", pwd, score)
 }
