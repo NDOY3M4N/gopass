@@ -108,11 +108,19 @@ func updateChars(msg tea.Msg, m model) (tea.Model, tea.Cmd) {
 		case " ":
 			m.listChars[m.cursorListChars].value = !m.listChars[m.cursorListChars].value
 		case "enter":
-			// TODO: trigger an error if no item is selected
+			var numSelectedItem int
+			for _, item := range m.listChars {
+				if item.value {
+					numSelectedItem++
+				}
+			}
 
-			m.quitting = true
-			m.selectionComplete = true
-			return m, tea.Quit
+			// NOTE: If we have just one selected item, we can't deselect it
+			if numSelectedItem > 0 {
+				m.quitting = true
+				m.selectionComplete = true
+				return m, tea.Quit
+			}
 		}
 	}
 
@@ -128,7 +136,7 @@ func (m model) View() string {
 		if m.selectionComplete {
 			o := password.Option{
 				Length: m.selectedItemLength,
-				// TODO: refactor this monstrosity
+				// PERF: refactor this monstrosity
 				HasLowercase: m.listChars[0].value,
 				HasUppercase: m.listChars[1].value,
 				HasNumber:    m.listChars[2].value,
