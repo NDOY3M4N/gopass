@@ -75,11 +75,13 @@ func updateLength(msg tea.Msg, m model) (tea.Model, tea.Cmd) {
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "j", "down":
-			// TODO: you know what to do right 😉
-			m.cursorListLength++
+			if m.cursorListLength < len(m.listLength)-1 {
+				m.cursorListLength++
+			}
 		case "k", "up":
-			// TODO: you know what to do right 😉
-			m.cursorListLength--
+			if m.cursorListLength > 0 {
+				m.cursorListLength--
+			}
 		case " ":
 			m.selectedItemLength = m.listLength[m.cursorListLength].value
 		case "enter":
@@ -95,13 +97,14 @@ func updateChars(msg tea.Msg, m model) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		switch msg.String() {
-		// TODO: add a key to selecting all the items
 		case "j", "down":
-			// TODO: you know what to do right 😉
-			m.cursorListChars++
+			if m.cursorListChars < len(m.listChars)-1 {
+				m.cursorListChars++
+			}
 		case "k", "up":
-			// TODO: you know what to do right 😉
-			m.cursorListChars--
+			if m.cursorListChars > 0 {
+				m.cursorListChars--
+			}
 		case " ":
 			m.listChars[m.cursorListChars].value = !m.listChars[m.cursorListChars].value
 		case "enter":
